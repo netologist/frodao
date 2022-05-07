@@ -1,7 +1,7 @@
 package frodao
 
-type ID int64
+type ID int
 
-func TableID(id ID) ID {
-	return id
+func TableID(id int) ID {
+	return ID(id)
 }

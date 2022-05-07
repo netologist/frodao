@@ -27,7 +27,7 @@ func NewDAO[T frodao.Record](tableName string) DAO[T] {
 }
 
 func (d *DAO[T]) Create(ctx context.Context, t *T) (*T, error) {
-	var lastInsertID frodao.ID
+	var lastInsertID int
 	query, _, _ := goqu.Dialect("postgres").Insert(d.TableName).Returning(goqu.I("id")).Rows(t).ToSQL()
 	err := SESSION.QueryRow(query).Scan(&lastInsertID)
 	if err != nil {
