@@ -22,10 +22,11 @@ CREATE TABLE users (
 import (
 	"github.com/hasanozgan/frodao"
 	"github.com/hasanozgan/frodao/nullable"
+	"github.com/hasanozgan/frodao/tableid"
 )
 
 type UserTable struct {
-	frodao.Table
+	frodao.Table[tableid.Int]
 
 	Username string                `db:"username"`
 	Password string                `db:"password"`
@@ -41,11 +42,12 @@ import (
 
 	"github.com/doug-martin/goqu/v9"
 	"github.com/hasanozgan/frodao/drivers/postgres"
+	"github.com/hasanozgan/frodao/tableid"
 )
 
 func NewUserDAO() *UserDAO {
 	return &UserDAO{
-		DAO: postgres.DAO[UserTable]{
+		DAO: postgres.DAO[UserTable, tableid.Int]{
 			TableName: "users",
 		},
 	}
@@ -55,7 +57,7 @@ type UserDAO struct {
 	postgres.DAO[UserTable]
 }
 
-func (d *UserDAO) FindByUsername(ctx context.Context, username string) (*UserTable, error) {
+func (d *UserDAO) FindByUsername(ctx context.Context, username string) ([]*UserTable, error) {
 	return d.FindByQuery(ctx, d.SelectQuery().Where(goqu.Ex{"username": username}).Limit(1))
 }
 ```

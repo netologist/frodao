@@ -2,12 +2,14 @@ package frodao
 
 import (
 	"context"
+
+	"github.com/hasanozgan/frodao/tableid"
 )
 
-type DAO[T Record] interface {
+type DAO[T Record, I tableid.Constraint] interface {
 	Create(ctx context.Context, record *T) (*T, error)
 	Update(ctx context.Context, record *T) error
-	Delete(ctx context.Context, id int) error
-	FindByID(ctx context.Context, id int) (*T, error)
+	Delete(ctx context.Context, id ID[I]) error
+	FindByID(ctx context.Context, id ID[I]) (*T, error)
 	GetTableName() string
 }

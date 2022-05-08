@@ -5,18 +5,19 @@ import (
 
 	"github.com/doug-martin/goqu/v9"
 	"github.com/hasanozgan/frodao/drivers/postgres"
+	"github.com/hasanozgan/frodao/tableid"
 )
 
 func NewUserDAO() *UserDAO {
 	return &UserDAO{
-		DAO: postgres.DAO[UserTable]{
+		DAO: postgres.DAO[UserTable, tableid.Int]{
 			TableName: "users",
 		},
 	}
 }
 
 type UserDAO struct {
-	postgres.DAO[UserTable]
+	postgres.DAO[UserTable, tableid.Int]
 }
 
 func (d *UserDAO) FindByUsername(ctx context.Context, username string) (*UserTable, error) {
