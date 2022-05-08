@@ -64,17 +64,21 @@ func (d *DAO[T]) Delete(ctx context.Context, id frodao.ID) error {
 }
 
 func (d *DAO[T]) FindByID(ctx context.Context, id frodao.ID) (*T, error) {
-	var dest []*T
+	if dest, err := d.FindByQuery(ctx, d.SelectQuery().Where(goqu.Ex{"id": id}).Limit(1)); err != nil {
+		return nil, err
+	} else if len(dest) == 1 {
+		return dest[0], nil
+	}
 
-	query, _, _ := goqu.Dialect("postgres").From(d.TableName).Where(goqu.Ex{"deleted": false, "id": id}).Limit(1).ToSQL()
+	return nil, nil
+}
 
-	err := sqlscan.Select(ctx, SESSION, &dest, query)
+func (d *DAO[T]) FirstRow(rows []*T, err error) (*T, error) {
 	if err != nil {
 		return nil, err
 	}
-
-	if len(dest) == 1 {
-		return dest[0], nil
+	if len(rows) == 1 {
+		return rows[0], nil
 	}
 	return nil, nil
 }
@@ -83,7 +87,7 @@ func (d *DAO[T]) SelectQuery() *goqu.SelectDataset {
 	return goqu.Dialect("postgres").From(d.TableName)
 }
 
-func (d *DAO[T]) FindByQuery(ctx context.Context, q *goqu.SelectDataset) (*T, error) {
+func (d *DAO[T]) FindByQuery(ctx context.Context, q *goqu.SelectDataset) ([]*T, error) {
 	var dest []*T
 
 	query, _, _ := q.Where(goqu.Ex{"deleted": false}).ToSQL()
@@ -93,10 +97,7 @@ func (d *DAO[T]) FindByQuery(ctx context.Context, q *goqu.SelectDataset) (*T, er
 		return nil, err
 	}
 
-	if len(dest) == 1 {
-		return dest[0], nil
-	}
-	return nil, nil
+	return dest, nil
 }
 
 func (d DAO[T]) GetTableName() string {

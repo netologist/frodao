@@ -20,5 +20,7 @@ type UserDAO struct {
 }
 
 func (d *UserDAO) FindByUsername(ctx context.Context, username string) (*UserTable, error) {
-	return d.FindByQuery(ctx, d.SelectQuery().Where(goqu.Ex{"username": username}).Limit(1))
+	return d.FirstRow(
+		d.FindByQuery(ctx, d.SelectQuery().Where(goqu.Ex{"username": username}).Limit(1)),
+	)
 }

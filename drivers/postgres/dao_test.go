@@ -36,7 +36,7 @@ func TestCreate(t *testing.T) {
 	mock.ExpectQuery(`INSERT INTO "test" ("a_field") VALUES ('some_field_value') RETURNING "id"`).
 		WillReturnRows(sqlmock.NewRows([]string{"id"}).AddRow(967))
 
-	mock.ExpectQuery(`SELECT * FROM "test" WHERE (("deleted" IS FALSE) AND ("id" = 967)) LIMIT 1`).
+	mock.ExpectQuery(`SELECT * FROM "test" WHERE (("id" = 967) AND ("deleted" IS FALSE)) LIMIT 1`).
 		WillReturnRows(sqlmock.NewRows([]string{"id", "a_field"}).AddRow(967, "some_field_value"))
 
 	r, err := dao.Create(context.Background(), &TestTable{AField: "some_field_value"})
@@ -87,7 +87,7 @@ func TestFindByID(t *testing.T) {
 	defer closeDB()
 	dao := postgres.NewDAO[TestTable]("test")
 
-	mock.ExpectQuery(`SELECT * FROM "test" WHERE (("deleted" IS FALSE) AND ("id" = 612)) LIMIT 1`).
+	mock.ExpectQuery(`SELECT * FROM "test" WHERE (("id" = 612) AND ("deleted" IS FALSE)) LIMIT 1`).
 		WillReturnRows(sqlmock.NewRows([]string{"id", "a_field"}).AddRow(612, "another_field_value"))
 
 	r, err := dao.FindByID(context.Background(), 612)
