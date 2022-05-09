@@ -18,23 +18,6 @@ CREATE TABLE users (
 );
 ```
 
-## Table Definition
-
-```go
-import (
-	"github.com/hasanozgan/frodao"
-	"github.com/hasanozgan/frodao/nullable"
-	"github.com/hasanozgan/frodao/tableid"
-)
-
-type UserTable struct {
-	frodao.Table[tableid.Int]
-
-	Username string                `db:"username"`
-	Password string                `db:"password"`
-	Address  nullable.Type[string] `db:"address"`
-}
-```
 
 ## DAO Interface
 ```go
@@ -55,8 +38,23 @@ type DAO[T Record, I tableid.Constraint] interface {
 }
 ```
 
+## Custom Table and DAO Definition
 
-## Custom DAO
+```go
+import (
+	"github.com/hasanozgan/frodao"
+	"github.com/hasanozgan/frodao/nullable"
+	"github.com/hasanozgan/frodao/tableid"
+)
+
+type UserTable struct {
+	frodao.Table[tableid.Int]
+
+	Username string                `db:"username"`
+	Password string                `db:"password"`
+	Address  nullable.Type[string] `db:"address"`
+}
+```
 
 ```go
 import (
