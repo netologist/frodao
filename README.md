@@ -1,6 +1,8 @@
 # Frodao
 
-The golang DAO library. Your best friend on the road like Frodo Baggins.
+The golang DAO library. Your best friend on the road like Frodo Baggins. 
+- Soft delete support.
+- Postgresql support.
 
 ## Example Schema
 
@@ -34,7 +36,27 @@ type UserTable struct {
 }
 ```
 
-## DAO Definition
+## DAO Interface
+```go
+package frodao
+
+import (
+	"context"
+
+	"github.com/hasanozgan/frodao/tableid"
+)
+
+type DAO[T Record, I tableid.Constraint] interface {
+	Create(ctx context.Context, record *T) (*T, error)
+	Update(ctx context.Context, record *T) error
+	Delete(ctx context.Context, id ID[I]) error
+	FindByID(ctx context.Context, id ID[I]) (*T, error)
+	GetTableName() string
+}
+```
+
+
+## Custom DAO
 
 ```go
 import (
