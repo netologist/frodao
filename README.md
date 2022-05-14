@@ -19,7 +19,7 @@ CREATE TABLE users (
 ```
 
 
-## DAO Interface
+## Table & DAO Interface
 ```go
 package frodao
 
@@ -28,6 +28,15 @@ import (
 
 	"github.com/hasanozgan/frodao/tableid"
 )
+
+type Table[T tableid.Constraint] struct {
+	Record `db:"-" goqu:"skipinsert,skipupdate"`
+
+	ID        ID[T]     `db:"id" goqu:"skipinsert,skipupdate"`
+	CreatedAt time.Time `db:"created_at" goqu:"skipinsert,skipupdate"`
+	UpdatedAt time.Time `db:"updated_at" goqu:"skipinsert"`
+	Deleted   bool      `db:"deleted" goqu:"skipinsert,skipupdate"`
+}
 
 type DAO[T Record, I tableid.Constraint] interface {
 	Create(ctx context.Context, record *T) (*T, error)
