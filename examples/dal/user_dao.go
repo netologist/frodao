@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/doug-martin/goqu/v9"
-	"github.com/hasanozgan/frodao/drivers/postgres"
-	"github.com/hasanozgan/frodao/tableid"
+	"github.com/netologist/frodao/drivers/postgres"
+	"github.com/netologist/frodao/tableid"
 )
 
 func NewUserDAO() *UserDAO {

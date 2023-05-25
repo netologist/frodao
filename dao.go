@@ -3,7 +3,7 @@ package frodao
 import (
 	"context"
 
-	"github.com/hasanozgan/frodao/tableid"
+	"github.com/netologist/frodao/tableid"
 )
 
 type DAO[T Record, I tableid.Constraint] interface {

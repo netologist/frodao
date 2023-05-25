@@ -1,4 +1,4 @@
-module github.com/hasanozgan/frodao
+module github.com/netologist/frodao
 
 go 1.18
 

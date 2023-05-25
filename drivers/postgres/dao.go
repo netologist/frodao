@@ -10,8 +10,8 @@ import (
 	_ "github.com/doug-martin/goqu/v9/dialect/postgres"
 	"github.com/georgysavva/scany/sqlscan"
 
-	"github.com/hasanozgan/frodao"
-	"github.com/hasanozgan/frodao/tableid"
+	"github.com/netologist/frodao"
+	"github.com/netologist/frodao/tableid"
 )
 
 var TimeNow = time.Now

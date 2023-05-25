@@ -2,9 +2,9 @@ package postgres_test
 
 import (
 	"github.com/DATA-DOG/go-sqlmock"
-	"github.com/hasanozgan/frodao"
-	"github.com/hasanozgan/frodao/drivers/postgres"
-	"github.com/hasanozgan/frodao/tableid"
+	"github.com/netologist/frodao"
+	"github.com/netologist/frodao/drivers/postgres"
+	"github.com/netologist/frodao/tableid"
 
 	"context"
 	"testing"

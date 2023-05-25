@@ -3,7 +3,7 @@ package nullable_test
 import (
 	"testing"
 
-	"github.com/hasanozgan/frodao/nullable"
+	"github.com/netologist/frodao/nullable"
 )
 
 func Test_Nullable(t *testing.T) {

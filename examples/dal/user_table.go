@@ -1,9 +1,9 @@
 package dal
 
 import (
-	"github.com/hasanozgan/frodao"
-	"github.com/hasanozgan/frodao/nullable"
-	"github.com/hasanozgan/frodao/tableid"
+	"github.com/netologist/frodao"
+	"github.com/netologist/frodao/nullable"
+	"github.com/netologist/frodao/tableid"
 )
 
 type UserTable struct {

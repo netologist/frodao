@@ -2,9 +2,9 @@ package mysql_test
 
 import (
 	"github.com/DATA-DOG/go-sqlmock"
-	"github.com/hasanozgan/frodao"
-	"github.com/hasanozgan/frodao/drivers/mysql"
-	"github.com/hasanozgan/frodao/tableid"
+	"github.com/netologist/frodao"
+	"github.com/netologist/frodao/drivers/mysql"
+	"github.com/netologist/frodao/tableid"
 
 	"context"
 	"testing"

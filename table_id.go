@@ -3,7 +3,7 @@ package frodao
 import (
 	"database/sql/driver"
 
-	"github.com/hasanozgan/frodao/tableid"
+	"github.com/netologist/frodao/tableid"
 )
 
 type ID[T tableid.Constraint] struct {

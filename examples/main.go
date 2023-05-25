@@ -6,9 +6,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/hasanozgan/frodao/drivers/postgres"
-	"github.com/hasanozgan/frodao/examples/dal"
-	"github.com/hasanozgan/frodao/nullable"
+	"github.com/netologist/frodao/drivers/postgres"
+	"github.com/netologist/frodao/examples/dal"
+	"github.com/netologist/frodao/nullable"
 )
 
 func main() {

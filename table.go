@@ -3,7 +3,7 @@ package frodao
 import (
 	"time"
 
-	"github.com/hasanozgan/frodao/tableid"
+	"github.com/netologist/frodao/tableid"
 )
 
 type Record interface {
