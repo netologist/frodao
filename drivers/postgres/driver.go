@@ -21,6 +21,6 @@ func Connect(dsn string, options ...frodao.Option) (err error) {
 	return nil
 }
 
-func Close() {
-	_ = SESSION.Close()
+func Close() error {
+	return SESSION.Close()
 }
