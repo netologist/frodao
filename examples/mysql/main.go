@@ -6,8 +6,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/netologist/frodao/drivers/postgres"
-	"github.com/netologist/frodao/examples/dal"
+	"github.com/netologist/frodao/drivers/mysql"
+	"github.com/netologist/frodao/examples/mysql/dal"
 	"github.com/netologist/frodao/nullable"
 )
 
@@ -15,10 +15,10 @@ func main() {
 	ctx := context.Background()
 	// DSN Format: postgresql://user:pass@localhost:5432/db?sslmode=disable
 	DSN := os.Getenv("DSN")
-	if err := postgres.Connect(DSN); err != nil {
+	if err := mysql.Connect(DSN); err != nil {
 		log.Fatalf("DB Connection failed %s", DSN)
 	}
-	defer postgres.Close()
+	defer mysql.Close()
 
 	userDAO := dal.NewUserDAO()
 	record, err := userDAO.Create(ctx, &dal.UserTable{

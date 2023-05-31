@@ -42,8 +42,13 @@ func (d *DAO[T, I]) Create(ctx context.Context, t *T) (*T, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	rv := reflect.ValueOf(lastInsertID)
-	return d.FindByID(ctx, frodao.TableID(rv.Interface().(I)))
+	id := frodao.ID[I]{
+		IDValue: rv.Interface().(I),
+		Exist:   true,
+	}
+	return d.FindByID(ctx, id)
 }
 
 func (d *DAO[T, I]) Update(ctx context.Context, t *T) error {
