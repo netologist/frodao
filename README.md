@@ -3,6 +3,7 @@
 The golang DAO library. Your best friend on the road like Frodo Baggins. 
 - Soft delete support.
 - Postgresql support.
+- Mysql support.
 
 ## Example Schema
 
